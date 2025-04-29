@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <title>Prompt Engineering Helper</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
+      h2 {
+        text-align: center;
+      }
+      textarea {
+        width: 100%;
+        height: 80px;
+        margin-bottom: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #output {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🧠 Prompt Engineering Helper</h2>
+    <p>Nhập chủ đề hoặc yêu cầu, hệ thống sẽ tạo prompt phù hợp:</p>
+    <textarea id="userInput" placeholder="e.g. Summarize a blog post about zero-shot learning..."></textarea><br>
+    <button onclick="createPrompt()">Generate Prompt</button>
+
+    <div id="output"></div>
+
+    <script>
+      function createPrompt() {
+        const inputText = document.getElementById("userInput").value;
+        google.script.run.withSuccessHandler(function(response) {
+          document.getElementById("output").textContent = response;
+        }).generatePrompt(inputText);
+      }
+    </script>
+  </body>
+</html>
